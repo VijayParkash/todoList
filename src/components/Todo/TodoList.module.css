@@ -1,0 +1,46 @@
+.main-container {
+  width: 100vw;
+  min-height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  background-image: url(../../assets/daylight.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 50%; */
+  height: 3rem;
+  background-color: #fff;
+  margin-top: 2rem;
+}
+
+.input-field {
+  font-size: 1rem;
+  border: none;
+  font-family: inherit;
+  line-height: 2rem;
+  flex: 1 0;
+  margin-left: 2rem;
+  background: transparent;
+  width: 100%;
+  outline: none;
+}
+
+.input-field :focus,
+:active {
+  outline: none;
+}
+
+.todo {
+  width: 100%;
+  max-width: 540px;
+  padding: 1rem;
+}
