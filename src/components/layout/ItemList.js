@@ -1,4 +1,4 @@
-import { Fragment, useState, useCallback, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 import FilteredList from "./FilteredList";
 import Filter from "./Filter";
@@ -17,7 +17,7 @@ const ItemList = () => {
   const [count, setCount] = useState(0);
 
   const updateLocalStorage = () => {
-    localStorage.setItem("toDoArray", JSON.stringify(taskList));
+    localStorage.setItem("toDoArray", JSON.stringify(TODO_TASKS));
   };
   const taskStatusHandler = (taskId) => {
     console.log(taskId);
