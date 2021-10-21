@@ -1,16 +1,24 @@
-import { Fragment } from "react";
-import { useRef } from "react";
+import { Fragment, useContext, useState } from "react";
 
 import Header from "../layout/Header";
 import ItemList from "../layout/ItemList";
+import { TodoContext } from "../store/TodoContext";
 import Card from "../UI/Card";
 import classes from "./TodoList.module.css";
 
 const TodoList = () => {
-  const value = useRef("");
+  const [inputTask, setInputTask] = useState("");
+  const [, dispatch] = useContext(TodoContext);
 
   const onChangeHandler = (event) => {
-    // value = event.target.value;
+    setInputTask(event.target.value);
+  };
+
+  const keydownHandler = (event) => {
+    if (event.keyCode === 13 && inputTask.trim().length > 0) {
+      dispatch({ type: "addTask", payload: inputTask });
+      setInputTask("");
+    }
   };
   return (
     <Fragment>
@@ -19,18 +27,16 @@ const TodoList = () => {
           <Header></Header>
           <Card className={`${classes["input-box"]}`}>
             <input
-              ref={value}
               className={classes["input-field"]}
               autoFocus
               type="text"
-              // value={value}
+              value={inputTask}
               placeholder="...add new task"
               onChange={onChangeHandler}
+              onKeyDown={keydownHandler}
             />
           </Card>
-          {/* <Card> */}
-            <ItemList></ItemList>
-          {/* </Card> */}
+          <ItemList></ItemList>
         </div>
       </div>
     </Fragment>

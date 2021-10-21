@@ -1,79 +1,50 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useContext } from "react";
 
-import FilteredList from "./FilteredList";
 import Filter from "./Filter";
-
-const TODO_TASKS = [
-  { id: 0, active: true, content: "first Task" },
-  { id: 1, active: false, content: "Second Task" },
-  { id: 2, active: true, content: "Third Task" },
-];
+import { TodoContext } from "../store/TodoContext";
+import TodoItem from "./TodoItem";
+import classes from "./ItemList.module.css";
 
 const ItemList = () => {
-  const toDoList = JSON.parse(localStorage.getItem("toDoArray")) || [];
 
-  const [filter, setFilter] = useState("all");
-  const [taskList, setTaskList] = useState(toDoList);
-  const [count, setCount] = useState(0);
+  const [{ tasks, filter }] = useContext(TodoContext);
+  const [editingId, setEditingId] = useState(null);
 
-  const updateLocalStorage = () => {
-    localStorage.setItem("toDoArray", JSON.stringify(TODO_TASKS));
-  };
-  const taskStatusHandler = (taskId) => {
-    console.log(taskId);
-    let updatedList = taskList.map((ele) => {
-      if (ele.id === taskId) {
-        return { ...ele, active: !ele.active };
-      }
-      return ele;
-    });
-
-    updateLocalStorage();
-    setTaskList(updatedList);
-  };
-
-  useEffect(() => {
-    setCount(() => {
-      return taskList.reduce((count, task) => {
-        if (task.active) {
-          count++;
-        }
-        return count;
-      }, 0);
-    });
-  }, [taskList]);
-
-  const filterTaskHandler = (filter) => {
-    setFilter(filter);
-  };
-
-  useEffect(() => {
-    if (filter === "all") {
-      setFilter("all");
-      setTaskList(toDoList);
-      return;
-    } else if (filter === "active") {
-      setFilter("active");
-      setTaskList(() => {
-        return toDoList.filter((task) => task.active === true);
-      });
-      return;
+  const filteredTasks = () => {
+    if (filter === "active") {
+      return tasks.filter((task) => !task.isCompleted);
     } else if (filter === "completed") {
-      setFilter("completed");
-      setTaskList(() => {
-        return toDoList.filter((task) => task.active === false);
-      });
-      return;
+      return tasks.filter((task) => task.isCompleted);
     }
-  }, [filter]);
+    return tasks;
+  };
+
+  const visibleTasks = filteredTasks();
+
+  // const isAllTaskCompleted = tasks.every((t) => t.isCompleted);
+  // console.log(isAllTaskCompleted);
+  // const allTaskSelectedHandler = (event) => {
+  //   dispatch({ type: "allCompleted", payload: event.target.checked });
+  // };
 
   return (
     <Fragment>
-      <FilteredList
-        taskList={taskList}
-        taskStatusHandler={taskStatusHandler}
-      ></FilteredList>
-      <Filter countValue={count} filterTaskHandler={filterTaskHandler}></Filter>
+      {/* <input
+        type="checkbox"
+        checked={isAllTaskCompleted}
+        onChange={allTaskSelectedHandler}
+      /> */}
+      <ul className={classes.todoList}>
+        {visibleTasks.map((item) => (
+          <TodoItem
+            key={item.id}
+            task={item}
+            isEditing={editingId === item.id}
+            setEditingId={setEditingId}
+          />
+        ))}
+      </ul>
+      <Filter></Filter>
     </Fragment>
   );
 };

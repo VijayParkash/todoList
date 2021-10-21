@@ -1,4 +1,4 @@
-.todo-list {
+.todoList {
   padding: 0;
   margin: 0;
   border-radius: 6px;
@@ -6,65 +6,4 @@
   background: #fff;
   width: 100%;
   box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
-}
-
-.todo-item {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  border-bottom: 1px solid #e3e4f1;
-  border-radius: 6px;
-  padding: 1rem 2.4rem;
-}
-
-.todo-item p {
-  margin-left: 1rem;
-  flex: 1;
-}
-
-.btn {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  color: #9495a5;
-  font-size: 1.4rem;
-  line-height: 1.4rem;
-  font-family: inherit;
-}
-
-.checkbox-circle,
-.checkbox-checked {
-  width: 24px;
-  height: 24px;
-  border: 1px solid #e3e4f1;
-  border-radius: 50%;
-  background: transparent;
-}
-
-.checkbox-circle:hover {
-  border: 1px solid rgb(222, 102, 247);
-}
-
-.checkbox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  transition: border 0.5s ease-in-out;
-}
-
-.checkbox-checked {
-  background: linear-gradient(to right, #55ddff, #c058f3);
-}
-
-.task-done {
-  text-decoration: line-through;
-  color: #9495a5;
-}
-
-.filters {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
 }

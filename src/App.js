@@ -1,9 +1,12 @@
+import { TodoProvider } from "./components/store/TodoContext";
 import TodoList from "./components/Todo/TodoList";
-import classes from "./index.css"
+import classes from "./index.css";
 
 function App() {
   return (
-    <TodoList className={classes.centered}></TodoList>
+    <TodoProvider>
+      <TodoList className={classes.centered}></TodoList>
+    </TodoProvider>
   );
 }
 
