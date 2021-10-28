@@ -22,7 +22,6 @@ const ItemList = () => {
   const visibleTasks = filteredTasks();
 
   // const isAllTaskCompleted = tasks.every((t) => t.isCompleted);
-  // console.log(isAllTaskCompleted);
   // const allTaskSelectedHandler = (event) => {
   //   dispatch({ type: "allCompleted", payload: event.target.checked });
   // };

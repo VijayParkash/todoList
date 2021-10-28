@@ -7,10 +7,6 @@ const TodoItem = ({ task, isEditing, setEditingId }) => {
   const [editTask, setEditTask] = useState(task.content);
   const [, dispatch] = useContext(TodoContext);
 
-  const taskEditHandler = () => {
-    setEditingId(task.id);
-  };
-
   const changeTaskHandler = (event) => {
     setEditTask(event.target.value);
   };
